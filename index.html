@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Creator</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+   <div class="lobby flex-center">
+       <h1>Artifact Creator</h1>
+       <button class="btn create">Create new</button>
+       <button class="btn browse">Browse</button>
+   </div>
+
+   <div class="creator">
+       <h3>Create new artifact</h3>
+       <input type="text" class="name-inp" placeholder="Name Your Artifact">
+
+       <div class="body-part">
+           <label class="part-label" for="head">Head
+               <input class="body-radio-input" type="radio" id="head" name="type" value="head">
+
+           </label>
+           <label class="part-label" for="body">Body
+               <input class="body-radio-input" type="radio" id="body" name="type" value="body">
+
+           </label>
+            <label class="part-label" for="gloves">Gloves
+                <input class="body-radio-input" type="radio" id="gloves" name="type" value="gloves">
+
+            </label>
+            <label class="part-label" for="pants">Pants
+                <input class="body-radio-input" type="radio" id="pants" name="type" value="pants">
+
+            </label>
+            <label class="part-label" for="boots">Boots
+                <input class="body-radio-input" type="radio" id="boots" name="type" value="boots">
+
+            </label>
+            <label class="part-label" for="sword">Weapon
+                <input class="body-radio-input" type="radio" id="weapon" name="type" value="weapon">
+
+            </label>
+            <label  class="part-label" for="other">Other
+                <input class="body-radio-input" type="radio" id="other" name="type" value="other">
+
+            </label>
+       </div>
+
+       <textarea name="description" id="description" placeholder="Description"></textarea>
+
+       <div class="stats">
+
+       </div>
+       <div class="artifact-image">
+
+       </div>
+       <div class="buttons-box">
+            <button class="btn upload-image">Add Image</button>
+            <button class="btn apply">Create</button>
+            <button class="btn close">Close</button>
+       </div>
+       
+   </div>
+
+   <div class="browser-window" id="browserWindow">
+       <h1>Browse Artifacts</h1>
+       <div class="browser-box">
+           
+       </div>
+       <button class="btn browser-close">Close</button>
+   </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
