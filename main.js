@@ -25,25 +25,33 @@ checkboxes.forEach(e=>{
 })
 
 class Artifact {
-    constructor(name, type, image, description) {
+    constructor(name, type, image, ench, description, isEnchanted) {
         this.name = name;
         this.type = type;
         this.image = image;
+        this.enchanted = isEnchanted;
+        this.ench = ench;
+        this.enchModif = 1;
         this.tier = Math.floor(Math.random() * 5 + 1);
         this.description = description;
         this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
         this.statTwo = Math.floor(Math.random() * 20);
-        this.price = Math.floor(Math.random() * 100) * this.tier;
+        this.price = Math.floor(Math.random() * 100) * this.tier * this.enchModif;
+        
     }
 }
 const artifactList = [];
 
 //dodaj wybor obrazka moze jakis
 
+
 function createNewArtifact() {
     const nameInp = document.querySelector('.name-inp').value;
-    const textarea = document.querySelector('#description').value;
-    artifactList.push ( new Artifact( nameInp, bodyPart, "image", textarea))
+    const descr = document.querySelector('#description').value;
+    const ench = document.querySelector('#enchanting').value;
+    let isEnchanted = false;
+    if (ench != '') isEnchanted = true;
+    artifactList.push ( new Artifact( nameInp, bodyPart, "image", ench, descr, isEnchanted))
     console.log('artifact Created')
     console.log(artifactList)
     
@@ -75,32 +83,50 @@ browserCloseBtn.addEventListener('click', ()=>{
     browserWindow.classList.toggle('visible');
 })
 
+// enchantingText.addEventListener('keyup', (e)=>{
+//     console.log(enchantingText.value);
+// })
+
 function updateBrowser() {
     let browserBox = document.querySelector('.browser-box');
     browserBox.innerHTML = '';
-    let icon = '🔸';
+    let icon = '💎';
     //iterate trough artifactList
     for (art of artifactList) {
 
         let bodyPart = art.type;
         let tier = art.tier;
+        let enchant = '';
+        let enchantIcons = '';
         let icons = '';
-        let firstStat = '';
-        if (bodyPart === 'body' || 'head' || 'gloves' || 'boots') {
-            firstStat = 'Defence: ';
-        } else if (bodyPart === 'weapon') {
+        let firstStat = 'Defence: ';
+        if (bodyPart === 'weapon') {
             firstStat = 'Damage: ';
         }
-
         // concat strings (diamonds)
         for (let i = 0; i < tier; i++) {
             icons += icon;
         }
+
+        if (art.ench.includes('aqua')) {
+            enchantIcons += '💧'
+        }
+        if (art.ench.includes('fir')) {
+            enchantIcons +='🔥'
+        }
+
+        // checks for enchantment
+        if (art.enchanted) {
+            enchant = `Enchanted: ${art.ench}`;
+        }
+
+
         browserBox.innerHTML += `
             <div class="artifact"> 
                 <div class="art-values">
                     <h3>${art.name} ${icons}</h3>
                     <p>${art.type}, tier ${art.tier}</p>
+                    <p>${enchant} ${enchantIcons}</p>
                     <p class="art-description">${art.description}</p>
                     <p class="art-price">Price: ${art.price} </p>
                     <p>${firstStat} ${art.statOne} </p>
@@ -113,4 +139,4 @@ function updateBrowser() {
         
     }
 }
-artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'Very sturdy heavy armor. Suitable for bigger enemies'))
+artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'io jah pul','Very sturdy heavy armor. Suitable for bigger enemies'))
