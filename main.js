@@ -111,8 +111,14 @@ function updateBrowser() {
         if (art.ench.includes('aqua')) {
             enchantIcons += '💧'
         }
-        if (art.ench.includes('fir')) {
+        if (art.ench.includes('ignis')) {
             enchantIcons +='🔥'
+        }
+        if (art.ench.includes('nox')) {
+            enchantIcons +='🖤'
+        }
+        if (art.ench.includes('sanguis')) {
+            enchantIcons += '🩸'
         }
 
         // checks for enchantment

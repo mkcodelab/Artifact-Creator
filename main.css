@@ -191,7 +191,7 @@ body {
     
 }
 .artifact {
-    background: #5c542b;
+    background: radial-gradient(rgb(155, 137, 78), rgb(114, 57, 0));
     display: flex;
     justify-content: space-between;
     color: gold;

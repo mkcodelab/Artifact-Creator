@@ -24,4 +24,7 @@
   #description {
     height: 4em;
   }
+  .artifact {
+    padding: 0.2em;
+  }
 }
