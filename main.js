@@ -29,10 +29,11 @@ class Artifact {
         this.name = name;
         this.type = type;
         this.image = image;
+        this.tier = Math.floor(Math.random() * 5 + 1);
         this.description = description;
-        this.statOne = Math.floor(Math.random() * 10 + 10);
+        this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
         this.statTwo = Math.floor(Math.random() * 20);
-        this.price = Math.floor(Math.random() * 100);
+        this.price = Math.floor(Math.random() * 100) * this.tier;
     }
 }
 const artifactList = [];
@@ -77,16 +78,33 @@ browserCloseBtn.addEventListener('click', ()=>{
 function updateBrowser() {
     let browserBox = document.querySelector('.browser-box');
     browserBox.innerHTML = '';
+    let icon = '🔸';
     //iterate trough artifactList
     for (art of artifactList) {
+
+        let bodyPart = art.type;
+        let tier = art.tier;
+        let icons = '';
+        let firstStat = '';
+        if (bodyPart === 'body' || 'head' || 'gloves' || 'boots') {
+            firstStat = 'Defence: ';
+        } else if (bodyPart === 'weapon') {
+            firstStat = 'Damage: ';
+        }
+
+        // concat strings (diamonds)
+        for (let i = 0; i < tier; i++) {
+            icons += icon;
+        }
         browserBox.innerHTML += `
             <div class="artifact"> 
                 <div class="art-values">
-                    <h3>${art.name}</h3>
-                    <p>${art.type}</p>
+                    <h3>${art.name} ${icons}</h3>
+                    <p>${art.type}, tier ${art.tier}</p>
                     <p class="art-description">${art.description}</p>
                     <p class="art-price">Price: ${art.price} </p>
-                    <p>First Stat: ${art.statOne} </p>
+                    <p>${firstStat} ${art.statOne} </p>
+
                 </div>
                 <div class="art-image">
                 </div>

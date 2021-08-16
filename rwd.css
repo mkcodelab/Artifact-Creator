@@ -1,0 +1,27 @@
+@media (max-width: 700px) {
+  .lobby {
+    width: 100%;
+  }
+  .creator {
+    width: 100%;
+    min-height: 100%;
+  }
+  .browser-window {
+    width: 100%;
+    min-height: 100%;
+  }
+  .body-part {
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .part-label {
+    font-size: 0.8em;
+    min-width: 25px;
+    text-align: center;
+  }
+  #description {
+    height: 4em;
+  }
+}
