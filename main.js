@@ -35,6 +35,7 @@ class Artifact {
         this.enchanted = isEnchanted;
         this.ench = ench;
         this.enchModif = 1;
+        // tier has to be based on name (prefixes or smth)
         this.tier = Math.floor(Math.random() * 5 + 1);
         this.description = description;
         this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
@@ -44,8 +45,6 @@ class Artifact {
     }
 }
 const artifactList = [];
-
-//dodaj wybor obrazka moze jakis
 
 //array of avilable enchantments
 const enchArr = 
@@ -61,7 +60,7 @@ const enchArr =
     {name: 'black steel', inc: 'nox ferrum', res: 'Black Steel'},
     {name: 'fire steel', inc: 'ignis ferrum', res: 'Fire Steel'},
     {name: 'iron blood', inc: 'ferrum sanguis', res: 'Iron Blood'},
-    {name: 'darkblood', inc: 'nox sanguis', res: 'Darkblood'},
+    {name: 'darkblood', inc: 'nox sanguis', res: 'Darkblood flow trough your veins mortal.'},
     {name: 'vigor', inc: 'aqua vitae', res: 'Vigor'},
     {name: 'maxVit', inc: 'vitae maximus', res: 'Hard to kill... Arent you?'},
     {name: 'abracadabra', inc: 'abracadabra', res: 'Seriously? Ok got it.'},
@@ -148,7 +147,7 @@ function updateBrowser() {
                     <h3>${art.name} ${icons}</h3>
                     <p>${art.type}, tier ${art.tier}</p>
                     <p>${enchant} ${enchantIcons}</p>
-                    <p>Spell: ${spell}</p>
+                    <p class="art-spell">Spell: ${spell}</p>
                     <p class="art-description">${art.description}</p>
                     <p class="art-price">Price: ${art.price} </p>
                     <p>${firstStat} ${art.statOne} </p>
@@ -161,3 +160,18 @@ function updateBrowser() {
     }
 }
 // artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'ignis','Very sturdy heavy armor. Suitable for bigger enemies', true))
+
+//todo
+/* 
+add name checking for some prefixes and sufixes...
+diablo-like scheme.
+
+if (name.includes('Strong'))
+or regex like if (name.match(/Strong|strong|Good|good|Exquisite|exquisite/))
+
+upgrade enchanting system.
+upgrade css.
+rethink rendering artifacts in the browser
+
+disbable inputting html code ;D
+*/

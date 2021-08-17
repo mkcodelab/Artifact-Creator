@@ -212,9 +212,13 @@ body {
     padding-left: 1em;
 }
 .art-values > p {
-    /* border: 1px solid black; */
     font-size: 0.8em;
+}
+.art-spell {
+    color: rgb(236, 210, 255);
+    text-shadow: 0 0 8px indigo;
 
+    /* background-image: linear-gradient(to left, transparent, rgba(100,0,100,.3)); */
 }
 
 .art-description {
