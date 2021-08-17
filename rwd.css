@@ -1,4 +1,7 @@
 @media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+  }
   .lobby {
     width: 100%;
   }
@@ -26,5 +29,8 @@
   }
   .artifact {
     padding: 0.2em;
+  }
+  .artifact h3 {
+    font-size: 1em;
   }
 }

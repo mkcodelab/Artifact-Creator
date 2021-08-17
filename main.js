@@ -48,10 +48,10 @@ const artifactList = [];
 function createNewArtifact() {
     const nameInp = document.querySelector('.name-inp').value;
     const descr = document.querySelector('#description').value;
-    const ench = document.querySelector('#enchanting').value;
+    const enchText = document.querySelector('#enchanting').value;
     let isEnchanted = false;
-    if (ench != '') isEnchanted = true;
-    artifactList.push ( new Artifact( nameInp, bodyPart, "image", ench, descr, isEnchanted))
+    if (enchText != '') isEnchanted = true;
+    artifactList.push ( new Artifact( nameInp, bodyPart, "image", enchText, descr, isEnchanted))
     console.log('artifact Created')
     console.log(artifactList)
     
@@ -83,10 +83,6 @@ browserCloseBtn.addEventListener('click', ()=>{
     browserWindow.classList.toggle('visible');
 })
 
-// enchantingText.addEventListener('keyup', (e)=>{
-//     console.log(enchantingText.value);
-// })
-
 function updateBrowser() {
     let browserBox = document.querySelector('.browser-box');
     browserBox.innerHTML = '';
@@ -100,6 +96,8 @@ function updateBrowser() {
         let enchantIcons = '';
         let icons = '';
         let firstStat = 'Defence: ';
+        
+        
         if (bodyPart === 'weapon') {
             firstStat = 'Damage: ';
         }
@@ -123,7 +121,7 @@ function updateBrowser() {
 
         // checks for enchantment
         if (art.enchanted) {
-            enchant = `Enchanted: ${art.ench}`;
+            enchant = `✨Enchanted: ${art.ench}`;
         }
 
 
@@ -145,4 +143,4 @@ function updateBrowser() {
         
     }
 }
-artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'io jah pul','Very sturdy heavy armor. Suitable for bigger enemies'))
+artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'ignis','Very sturdy heavy armor. Suitable for bigger enemies', true))

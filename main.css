@@ -10,7 +10,6 @@ body {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-
 }
 .flex-center {
     display: flex;
@@ -125,12 +124,13 @@ body {
     
 }
 .browser-window > h1 {
-    color: goldenrod;
+    color: rgb(241, 170, 103);
+    text-shadow: 2px 2px 1px black;
     text-align: center;
     margin-bottom: 0.5em;
     padding: 0.2em;
     border-bottom: 2px solid goldenrod;
-    text-shadow: 3px 3px 3px #553;
+    
 }
 .body-part {
     padding: 1em;
@@ -162,6 +162,7 @@ body {
     /* background: rgba(0,0,0,.1); */
     color: white;
 }
+
 .visible {
     visibility: visible;
     z-index: 10;
