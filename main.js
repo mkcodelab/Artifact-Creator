@@ -73,12 +73,13 @@ function createNewArtifact() {
     const nameInp = document.querySelector('.name-inp').value;
     const descr = document.querySelector('#description').value;
     const enchText = document.querySelector('#enchanting').value;
+    const img = document.querySelector('#targetImg').src;
 
     let enchant = enchText.trim();
     console.log(enchant)
     let isEnchanted = false;
     if (enchant != '') isEnchanted = true;
-    artifactList.push ( new Artifact( nameInp, bodyPart, "image", enchant, descr, isEnchanted))
+    artifactList.push ( new Artifact( nameInp, bodyPart, img, enchant, descr, isEnchanted))
     console.log('artifact Created')
     console.log(artifactList)
     
@@ -152,7 +153,7 @@ function updateBrowser() {
                     <p class="art-price">Price: ${art.price} </p>
                     <p>${firstStat} ${art.statOne} </p>
                 </div>
-                <div class="art-image">
+                    <img class="art-image" src="${art.image}">
                 </div>
             </div>
         `
