@@ -7,16 +7,17 @@ const CH = canvas.height = renderSize;
 const targetImg = document.querySelector('#targetImg');
 targetImg.width = CW;
 targetImg.height = CH;
-// const armorImg = document.querySelector('#armorImg');
-// targetImg.width = armorImg.width = CW;
-// targetImg.height = armorImg.height = CH;
+let spriteSize = 64
 
 //todo
-// upscale resolution of elements
 // make themed spritesheets, steel, iron, copper, crystaline, etc.
+
+// optionals
+// upscale resolution of elements
 // option of assembly elements on canvas based on x and y coordinates maybe
-// it would be quite difficult
+// it would be too difficult to align them
 // example: some gem placed in pommel.
+
 
 // load spritesheets
 // sword parts
@@ -37,99 +38,88 @@ pauldronSprite.src = 'assets/pauldrons.png';
 const decoSprite = new Image();
 decoSprite.src = 'assets/decos.png';
 
-
 //generate image based on random spritesheet elements
 
-function assemble() {
-  
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.imageSmoothingEnabled = false;
+// unified assembly function for every part, but it has to have 4 elements
 
-  // math random * number of frames in spritesheet * width of sprite
-  let spriteSize = 64
-  // FRAMES = IMG.WIDTH / SPRITESIZE
-  let blankFrSize = swordSprite.width / spriteSize;
-  let gripFrSize = gripSprite.width / spriteSize;
-  let pomFrSize = pommelSprite.width / spriteSize;
-  let grdFrSize = guardSprite.width / spriteSize;
+// function unifiedAssembly(el1, el2, el3, el4) {
+//   let el1FrSize = el1.width / spriteSize;
+//   let el2FrSize = el2.width / spriteSize;
+//   let el3FrSize = el3.width / spriteSize;
+//   let el4FrSize = el4.width / spriteSize;
+//   // four elements and its Frame X
+//   let el1X = Math.floor(Math.random() * el1FrSize) * spriteSize;
+//   let el2X = Math.floor(Math.random() * el2FrSize) * spriteSize;
+//   let el3X = Math.floor(Math.random() * el3FrSize) * spriteSize;
+//   let el4X = Math.floor(Math.random() * el4FrSize) * spriteSize;
+//   // drawing elements on top of each other
+//   ctx.imageSmoothingEnabled = false;
+//   ctx.clearRect(0, 0, CW, CH);
+//   ctx.drawImage(el1, el1X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+//   ctx.drawImage(el2, el2X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+//   ctx.drawImage(el3, el3X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+//   ctx.drawImage(el4, el4X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
 
-  let swordX = Math.floor(Math.random() * blankFrSize) * spriteSize;
-  let gripX = Math.floor(Math.random() * gripFrSize) * spriteSize;
-  let pommelX = Math.floor(Math.random() * pomFrSize) * spriteSize;
-  let guardX = Math.floor(Math.random() * grdFrSize) * spriteSize;
+//   let imgData = canvas.toDataURL();
+//   targetImg.src = imgData;
+//   console.log('unified assembly completed')
+// }
 
-  //random rotation
-  let rotate = false;
-  if (rotate) {
-    let deg = Math.floor(Math.random()*360);
-    // ctx.translate(CW/2, CH/2);
-    ctx.rotate(20 * Math.PI / 180);
-    
+// upgraded unified assembly function, with "existence" check
+function unifiedAssembly(el1, el2, el3, el4) {
+  ctx.clearRect(0, 0, CW, CH);
+  // checking if element is passed
+  if (el1) {
+     let el1FrSize = el1.width / spriteSize;
+     let el1X = Math.floor(Math.random() * el1FrSize) * spriteSize;
+     ctx.imageSmoothingEnabled = false;
+     ctx.drawImage(el1, el1X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+  }
+  if (el2) {
+    let el2FrSize = el2.width / spriteSize;
+    let el2X = Math.floor(Math.random() * el2FrSize) * spriteSize;
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(el2, el2X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+  }
+  if (el3) {
+    let el3FrSize = el3.width / spriteSize;
+    let el3X = Math.floor(Math.random() * el3FrSize) * spriteSize;
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(el3, el3X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
+  }
+  if (el4) {
+    let el4FrSize = el4.width / spriteSize;
+    let el4X = Math.floor(Math.random() * el4FrSize) * spriteSize;
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(el4, el4X, 0, spriteSize, spriteSize, 0, 0, CW, CH);
   }
 
-  // drawing every element
-  // drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
-  ctx.drawImage(swordSprite, swordX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  ctx.drawImage(gripSprite, gripX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  ctx.drawImage(guardSprite, guardX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  ctx.drawImage(pommelSprite, pommelX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  
-  let imgFlip = false;
-  let flipX = Math.random() > 0.5 ? -1 : 1;
-  let flipY = Math.random() > 0.5 ? -1 : 1;
-
-  // random flipping image horizontally / vertically
-  if (flipX == -1 && imgFlip) {
-    ctx.save();
-    ctx.translate(CW, 0);
-    ctx.scale(-1, 1)
-    
-  }
-  if (flipY == -1 && imgFlip) {
-    ctx.save();
-    ctx.translate(0, CW);
-    ctx.scale(1, -1);
-    
-  }
-  
-  // converting canvas to base64
   let imgData = canvas.toDataURL();
-  //img url = url from above
   targetImg.src = imgData;
+  console.log('unified assembly completed')
 }
-const assemblyBtn = document.querySelector('#assemblyBtn');
 
+const assemblyBtn = document.querySelector('#assemblyBtn');
 assemblyBtn.addEventListener('click', ()=> {
   if (bodyPart == 'weapon') {
-    assemble();
+    unifiedAssembly(swordSprite, gripSprite, pommelSprite, guardSprite);
   }
   if (bodyPart == 'body') {
-    assembleArmor();
+    unifiedAssembly(armorSprite, decoSprite, pauldronSprite);
+  }
+  if (bodyPart == 'boots') {
+    unifiedAssembly();
+  }
+  if (bodyPart == 'head') {
+    unifiedAssembly();
+  }
+  if (bodyPart == 'pants') {
+    unifiedAssembly();
+  }
+  if (bodyPart == 'gloves') {
+    unifiedAssembly();
+  }
+  if (bodyPart == 'other') {
+    unifiedAssembly();
   }
 });
-
-// armor assembly
-function assembleArmor() {
-  let spriteSize = 64
-  let armorFrSize = armorSprite.width / spriteSize;
-  let pauldronFrSize = pauldronSprite.width / spriteSize;
-  let decoFrSize = decoSprite.width / spriteSize;
-
-  let armorX = Math.floor(Math.random() * armorFrSize) * spriteSize;
-  let decoX = Math.floor(Math.random() * decoFrSize) * spriteSize;
-  let pauldronX = Math.floor(Math.random() * pauldronFrSize) * spriteSize;
-  // ctx.restore();
-  ctx.imageSmoothingEnabled = false;
-
-  ctx.clearRect(0, 0, CW, CH);
-  ctx.drawImage(armorSprite, armorX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  ctx.drawImage(decoSprite, decoX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-  ctx.drawImage(pauldronSprite, pauldronX, 0, spriteSize, spriteSize, 0, 0, CW, CH);
-
-  let imgData = canvas.toDataURL();
-  targetImg.src = imgData;
-
-}
-// const assembleArmorBtn = document.querySelector('#assembleArmorBtn');
-// assembleArmorBtn.addEventListener('click', assembleArmor);
-

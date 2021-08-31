@@ -173,6 +173,11 @@ body {
     display: flex;
     justify-content: space-around;
 }
+.img-box {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}
 .btn {
     box-shadow: inset 0 0 15px rgba(0,0,0,.5);
     border: none;
@@ -195,7 +200,8 @@ body {
     /* background: radial-gradient(rgb(155, 137, 78), rgb(114, 57, 0)); */
     background: rgba(0,0,0,.2);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     color: gold;
     margin-bottom: 2px;
     border-bottom: 2px solid rgba(0,0,0,.5);
