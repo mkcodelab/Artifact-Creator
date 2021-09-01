@@ -167,6 +167,9 @@ function updateBrowser() {
 add name checking for some prefixes and sufixes...
 diablo-like scheme.
 
+add specific class for magical, non-magical, unique and rare items
+... Diablo for the win!
+
 if (name.includes('Strong'))
 or regex like if (name.match(/Strong|strong|Good|good|Exquisite|exquisite/))
 
