@@ -24,20 +24,21 @@ const gripSprite = new Image(); gripSprite.src = 'assets/grips.png';
 const swordSprite = new Image(); swordSprite.src = 'assets/blanks.png';
 const pommelSprite = new Image(); pommelSprite.src = 'assets/pommels.png';
 const guardSprite = new Image(); guardSprite.src = 'assets/guards.png';
-
 //mace parts
 const shaftSprite = new Image(); shaftSprite.src = "assets/shafts.png";
 const headSprite = new Image(); headSprite.src = 'assets/heads.png';
-
 // armor parts
 const armorSprite = new Image(); armorSprite.src = 'assets/chests.png';
 const pauldronSprite = new Image(); pauldronSprite.src = 'assets/pauldrons.png';
 const decoSprite = new Image(); decoSprite.src = 'assets/decos.png';
-
 //pants parts
 const pantsSprite = new Image(); pantsSprite.src = 'assets/pants.png';
 const tassetSprite = new Image(); tassetSprite.src = 'assets/tassets.png'; //lol
 const cuisseSprite = new Image(); cuisseSprite.src = 'assets/cuisses.png';
+// potions
+const glassSprite = new Image(); glassSprite.src = 'assets/glasses.png';
+const fluidSprite = new Image(); fluidSprite.src = 'assets/fluids.png';
+const paperSprite = new Image(); paperSprite.src = 'assets/papers.png';
 
 //generate image based on random spritesheet elements
 
@@ -81,8 +82,11 @@ assemblyBtn.addEventListener('click', ()=> {
   
   if (bodyPart == 'weapon') {
     let category = Math.floor(Math.random() * 2);
+    // sword
     if (category == 0) unifiedAssembly(swordSprite, gripSprite, pommelSprite, guardSprite);
+    // mace
     if (category == 1) unifiedAssembly(shaftSprite, headSprite);
+    // axe
   }
   if (bodyPart == 'body') {
     unifiedAssembly(armorSprite, decoSprite, pauldronSprite);
@@ -100,6 +104,8 @@ assemblyBtn.addEventListener('click', ()=> {
     unifiedAssembly();
   }
   if (bodyPart == 'other') {
-    unifiedAssembly();
+    // let category = Math.floor(Math.random() * 2);
+    let category = 0;
+    if (category == 0) unifiedAssembly(fluidSprite, glassSprite, paperSprite);
   }
 });

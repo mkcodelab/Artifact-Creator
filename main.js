@@ -26,7 +26,7 @@ checkboxes.forEach(e=>{
         bodyPart = el.value;
     })
 })
-
+// 
 class Artifact {
     constructor(name, type, image, ench, description, isEnchanted) {
         this.name = name;
@@ -36,7 +36,7 @@ class Artifact {
         this.ench = ench;
         this.enchModif = 1;
         // tier has to be based on name (prefixes or smth)
-        this.tier = Math.floor(Math.random() * 5 + 1);
+        this.tier = Math.floor(Math.random() * 3 + 1);
         this.description = description;
         this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
         this.statTwo = Math.floor(Math.random() * 20);
