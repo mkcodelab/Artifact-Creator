@@ -130,9 +130,7 @@ body {
     z-index: 0;
     border-left: 1px solid goldenrod;
     border-right: 1px solid goldenrod;
-    /* overflow-y: scroll; */
     overflow: hidden;
-    /* scroll-behavior: smooth; */
 }
 .browser-window > h1 {
     color: rgb(241, 170, 103);
