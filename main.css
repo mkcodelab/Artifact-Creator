@@ -58,7 +58,7 @@ body {
     z-index: -1;
     padding: 0.5em;
 }
-.creator > h3 {
+.creator > h2 {
     color: white;
     text-align: center;
     margin: 0.5em;
@@ -113,7 +113,11 @@ body {
 .browser-window {
     /* visibility: hidden; */
     opacity: 0;
-    position: absolute;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 0.5em;
     top: 50%;
     left: 50%;
@@ -122,24 +126,55 @@ body {
     max-height: 80%;
     transform: translate(-50%, 100%) scale(.1, .1);
     transition: transform .5s ease, opacity .5s ease, z-index .5s ease;
-    background: #666;
+    background-image: radial-gradient(#888, #222);
     z-index: 0;
     border-left: 1px solid goldenrod;
     border-right: 1px solid goldenrod;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    overflow: hidden;
+    /* scroll-behavior: smooth; */
 }
 .browser-window > h1 {
     color: rgb(241, 170, 103);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
     text-shadow: 2px 2px 1px black;
     text-align: center;
     margin-bottom: 0.5em;
     padding: 0.2em;
     border-bottom: 2px solid goldenrod;
+    background: rgba(0,0,0,.1);
+}
+.browser-box::-webkit-scrollbar-track {
+    background: none;
+}
+.browser-box::-webkit-scrollbar {
+   width: .4rem;
+   background: none;
+   padding-right: 1rem;
+}
+.browser-box::-webkit-scrollbar-thumb {
+    width: .4rem;
+    background: goldenrod;
+    border-radius: 10px;
+ }
+ /* box with artifacts within, scrollable */
+.browser-box {
+    overflow-y: scroll;
+    position: absolute;
+    padding: .5rem;
+    width: 95%;
+    height: 80%;
 }
 .browser-close {
-    position: absolute;
+    position: fixed;
     bottom: 5px;
     left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
 }
 
 .body-part {
@@ -150,22 +185,15 @@ body {
 .body-radio-input {
     -webkit-appearance: none;
     -moz-appearance: none;
-    /* display: block; */
-    /* position: absolute; */
-    
-    /* margin-left: auto; */
-    /* margin-right: auto; */
     margin: .2rem;
     width: 1.5rem;
     height: 1rem;
-    background: rgba(0,0,0,.2);
-    border: 2px solid rgba(0,0,0,.2);
-
+    background: rgba(0,0,0,.1);
+    border: 2px solid rgba(0,0,0,.1);
     border-radius: 5px;
     cursor: pointer;
 }
 .body-radio-input:checked {
-    /* background: linear-gradient(90deg,gold, goldenrod, orange, gold); */
     background: goldenrod;
     box-shadow: 0 0 10px 0 goldenrod;
 }
@@ -175,15 +203,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
-    /* margin: 0.2em; */
-    /* min-width: 50px; */
     width: 5rem;
     height: 5rem;
     padding: 0.5em;
     text-align: center;
     cursor: pointer;
-    /* background: rgba(0,0,0,.1); */
     color: white;
 }
 .part-label:hover {
@@ -222,18 +246,23 @@ body {
     transition: color .4s ease, transform .4s ease;
 }
 .btn:hover {
-    transform: translateX(-5px);
+    /* transform: translateX(-5px); */
     filter: contrast(150%);
     color: goldenrod;
     cursor: pointer;
 }
+.tier-ico, .tier-ico-2 {
+    font-style: normal;
+    font-size: 0.5rem;
+}
+
 .artifact {
     /* background: radial-gradient(rgb(155, 137, 78), rgb(114, 57, 0)); */
     background: rgba(0,0,0,.2);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    color: gold;
+    color: goldenrod;
     margin-bottom: 2px;
     border-bottom: 2px solid rgba(0,0,0,.5);
     border-top: 2px solid rgba(255,255,255,.2);
@@ -272,5 +301,5 @@ body {
     height: 100px;
     background-color: rgba(0,0,0,.1);
     border-radius: 1rem;
-    
+    /* image-rendering: pixelated; */
 }

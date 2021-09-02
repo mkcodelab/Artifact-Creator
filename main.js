@@ -48,7 +48,10 @@ class Artifact {
      // tier has to be based on name (prefixes or smth)
     calcTier() {
         let tier = 0;
+        // for loop for name maching ?
+        // if (this.name.match(/Strong|strong|Good|good|Exquisite|exquisite/)) tier += 1;
         if (this.name.toLowerCase().includes("superior")) tier += 2;
+        if (this.name.toLowerCase().includes("great")) tier += 1;
         if (this.name.toLowerCase().includes("sharp")) tier += 1;
         if (this.name.toLowerCase().includes("sharpness")) tier += 1;
         if (this.name.toLowerCase().includes("strong")) tier += 1;
@@ -59,7 +62,11 @@ class Artifact {
         this.price = Math.floor(Math.random() * 100) * this.tier * this.enchModif;
     }
     calcStats() {
-        this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
+        let statOne = 0;
+        if (this.name.toLowerCase().includes("sword")) statOne += 5;
+        if (this.name.toLowerCase().includes("carnage")) statOne += 20;
+        if (this.name.toLowerCase().includes("hammer")) statOne += 10;
+        this.statOne = statOne + Math.floor(Math.random() * 10 + 10) * this.tier;
         this.statTwo = Math.floor(Math.random() * 20);
     }
 }
@@ -92,16 +99,16 @@ function createNewArtifact() {
     const nameInp = document.querySelector('.name-inp').value;
     const descr = document.querySelector('#description').value;
     const enchText = document.querySelector('#enchanting').value;
-    const img = document.querySelector('#targetImg').src;
+    const img = document.querySelector('#targetImg');
 
     let enchant = enchText.trim();
     console.log(enchant)
     let isEnchanted = false;
     if (enchant != '') isEnchanted = true;
-    artifactList.push ( new Artifact( nameInp, bodyPart, img, enchant, descr, isEnchanted))
+    artifactList.push ( new Artifact( nameInp, bodyPart, img.src, enchant, descr, isEnchanted))
     console.log('artifact Created')
     console.log(artifactList)
-    
+    img.src = 'assets/default.png'
 }
 const applyBtn = document.querySelector('.apply');
 applyBtn.addEventListener('click', ()=>{
@@ -110,19 +117,16 @@ applyBtn.addEventListener('click', ()=>{
     createVisible = false;
     creator.classList.toggle('visible')
 })
-
 const browseBtn = document.querySelector('.browse')
 browseBtn.addEventListener('click', ()=>{
     openBrowser();
 })
-
 const browserWindow = document.querySelector('.browser-window')
 function openBrowser() {
     console.log('opened')
     updateBrowser();
     browserWindow.classList.toggle('visible');
 }
-
 const browserCloseBtn = document.querySelector('.browser-close');
 browserCloseBtn.addEventListener('click', ()=>{
     browserWindow.classList.toggle('visible');
@@ -133,7 +137,7 @@ browserCloseBtn.addEventListener('click', ()=>{
 function updateBrowser() {
     let browserBox = document.querySelector('.browser-box');
     browserBox.innerHTML = '';
-    let icon = '💎';
+    let icon = `<i class="tier-ico">💎</i>`;
     //iterate trough artifactList
     for (art of artifactList) {
 
@@ -147,10 +151,13 @@ function updateBrowser() {
         if (bodyPart === 'weapon') {
             firstStat = 'Damage: ';
         }
+        if (tier >= 5) {
+            icon = '<i class="tier-ico-2">💰</i>';
+        }
         // concat strings (diamonds)
-        // for (let i = 0; i < tier; i++) {
-        //     icons += icon;
-        // }
+        for (let i = 0; i < tier; i++) {
+            icons += icon;
+        }
         let spell = '';
         enchArr.forEach(ench => {
             if (ench.inc === art.ench.toLowerCase()) {
@@ -160,7 +167,6 @@ function updateBrowser() {
             }
         });
 
-// add eventlistener to all .artifact
         browserBox.innerHTML += `
             <div class="artifact"> 
                 <div class="art-values">
@@ -176,10 +182,9 @@ function updateBrowser() {
                 </div>
             </div>
         `
-        
     }
 }
-// artifactList.push ( new Artifact( 'Chestplate of dark steel', 'body', "image", 'ignis','Very sturdy heavy armor. Suitable for bigger enemies', true))
+// artifactList.push ( new Artifact( 'Chestplate', 'body', "image", 'ignis','descr', true))
 
 //todo
 /* 
@@ -193,8 +198,5 @@ if (name.includes('Strong'))
 or regex like if (name.match(/Strong|strong|Good|good|Exquisite|exquisite/))
 
 upgrade enchanting system.
-upgrade css.
-rethink rendering artifacts in the browser
-
 disbable inputting html code ;D
 */
