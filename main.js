@@ -35,13 +35,32 @@ class Artifact {
         this.enchanted = isEnchanted;
         this.ench = ench;
         this.enchModif = 1;
-        // tier has to be based on name (prefixes or smth)
-        this.tier = Math.floor(Math.random() * 3 + 1);
+       
+        this.tier = 0;
         this.description = description;
+        this.statOne = 0;
+        this.statTwo = 0;
+        this.price = 0;
+        this.calcTier();
+        this.calcPrice();
+        this.calcStats();
+    }
+     // tier has to be based on name (prefixes or smth)
+    calcTier() {
+        let tier = 0;
+        if (this.name.toLowerCase().includes("superior")) tier += 2;
+        if (this.name.toLowerCase().includes("sharp")) tier += 1;
+        if (this.name.toLowerCase().includes("sharpness")) tier += 1;
+        if (this.name.toLowerCase().includes("strong")) tier += 1;
+        if (this.description.length >= 15) tier += 2;
+        this.tier = tier;
+    }
+    calcPrice() {
+        this.price = Math.floor(Math.random() * 100) * this.tier * this.enchModif;
+    }
+    calcStats() {
         this.statOne = Math.floor(Math.random() * 10 + 10) * this.tier;
         this.statTwo = Math.floor(Math.random() * 20);
-        this.price = Math.floor(Math.random() * 100) * this.tier * this.enchModif;
-        
     }
 }
 const artifactList = [];
@@ -129,9 +148,9 @@ function updateBrowser() {
             firstStat = 'Damage: ';
         }
         // concat strings (diamonds)
-        for (let i = 0; i < tier; i++) {
-            icons += icon;
-        }
+        // for (let i = 0; i < tier; i++) {
+        //     icons += icon;
+        // }
         let spell = '';
         enchArr.forEach(ench => {
             if (ench.inc === art.ench.toLowerCase()) {

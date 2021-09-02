@@ -9,7 +9,7 @@ body {
     background: black;
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .flex-center {
     display: flex;
@@ -43,16 +43,19 @@ body {
 
 .creator {
     position: absolute;
+    /* display: none; */
+    opacity: 0;
+    /* visibility: hidden; */
+    
     top: 50%; 
     left: 50%;
-    transition: transform .4s ease;
-    transform: translate(-50%, 200%);
-    visibility: hidden;
+    transition: transform .5s ease, opacity .5s ease, z-index .5s ease;
+    transform: translate(-50%, 100%) scale(.1, .1);
     width: 50%;
     min-height: 60%;
     /* border: 2px solid lightgray; */
     background: radial-gradient(#888, #222);
-    z-index: 0;
+    z-index: -1;
     padding: 0.5em;
 }
 .creator > h3 {
@@ -63,7 +66,6 @@ body {
 .name-inp, .text-input, .body-part, .part-label {
     border-radius: 10px;
     box-shadow: inset 0 0 15px rgba(0,0,0,.5);
-
 }
 .name-inp {
     padding: 0.5em;
@@ -109,19 +111,22 @@ body {
     color: #999;
 }
 .browser-window {
-    visibility: hidden;
+    /* visibility: hidden; */
+    opacity: 0;
     position: absolute;
     padding: 0.5em;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 50%;
     min-height: 80%;
+    max-height: 80%;
+    transform: translate(-50%, 100%) scale(.1, .1);
+    transition: transform .5s ease, opacity .5s ease, z-index .5s ease;
     background: #666;
     z-index: 0;
     border-left: 1px solid goldenrod;
     border-right: 1px solid goldenrod;
-    
+    overflow-y: scroll;
 }
 .browser-window > h1 {
     color: rgb(241, 170, 103);
@@ -130,8 +135,13 @@ body {
     margin-bottom: 0.5em;
     padding: 0.2em;
     border-bottom: 2px solid goldenrod;
-    
 }
+.browser-close {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+}
+
 .body-part {
     padding: 1em;
     display: flex;
@@ -140,33 +150,52 @@ body {
 .body-radio-input {
     -webkit-appearance: none;
     -moz-appearance: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 1em;
+    /* display: block; */
+    /* position: absolute; */
+    
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: .2rem;
+    width: 1.5rem;
+    height: 1rem;
     background: rgba(0,0,0,.2);
     border: 2px solid rgba(0,0,0,.2);
-    border-radius: 2px;
+
+    border-radius: 5px;
     cursor: pointer;
 }
 .body-radio-input:checked {
-    background: linear-gradient(90deg,gold, goldenrod, orange, gold);
+    /* background: linear-gradient(90deg,gold, goldenrod, orange, gold); */
+    background: goldenrod;
+    box-shadow: 0 0 10px 0 goldenrod;
 }
 .part-label {
-    display: block;
-    margin: 0.2em;
-    min-width: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    /* margin: 0.2em; */
+    /* min-width: 50px; */
+    width: 5rem;
+    height: 5rem;
     padding: 0.5em;
     text-align: center;
+    cursor: pointer;
     /* background: rgba(0,0,0,.1); */
     color: white;
 }
+.part-label:hover {
+    box-shadow: 0 0 10px 0 goldenrod;
+}
 
+/* has to be there for the transition to work properly */
 .visible {
+    opacity: 1;
     visibility: visible;
-    z-index: 10;
-    transform: translate(-50%, -50%);
+    z-index: 2;
+    transform: translate(-50%, -50%) scale(1, 1);
 }
 .buttons-box {
     width: 100%;
@@ -177,6 +206,9 @@ body {
     display: flex;
     padding: 1rem;
     justify-content: center;
+}
+#targetImg {
+    image-rendering: pixelated;
 }
 .btn {
     box-shadow: inset 0 0 15px rgba(0,0,0,.5);
@@ -194,7 +226,6 @@ body {
     filter: contrast(150%);
     color: goldenrod;
     cursor: pointer;
-    
 }
 .artifact {
     /* background: radial-gradient(rgb(155, 137, 78), rgb(114, 57, 0)); */
