@@ -269,7 +269,7 @@ body {
     padding-right: 2em;
 }
 .artifact:hover {
-    filter: contrast(120%);
+    filter: contrast(150%);
     cursor: pointer;
 }
 .art-values {

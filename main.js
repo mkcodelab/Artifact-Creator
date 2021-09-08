@@ -70,7 +70,7 @@ class Artifact {
         this.statTwo = Math.floor(Math.random() * 20);
     }
 }
-const artifactList = [];
+let artifactList = [];
 
 //array of avilable enchantments
 const enchArr = 
@@ -95,6 +95,27 @@ const enchArr =
   
 ];
 
+function saveToLocalStorage(array) {
+    // stringifying artifact array
+    let json = JSON.stringify(array);
+    
+    // console.log(json);
+    //saving json to localstorage
+    localStorage.setItem('artlist' ,json);
+}
+
+function getFromLocalStorage() {
+    let json = localStorage.getItem('artlist');
+    let artlist = JSON.parse(json);
+    // console.log(artlist);
+    artifactList = artlist;
+}
+
+function deleteArtifact(artifact) {
+    // use filter method to remove from array, it can be name of artifact
+    
+}
+
 function createNewArtifact() {
     const nameInp = document.querySelector('.name-inp').value;
     const descr = document.querySelector('#description').value;
@@ -109,6 +130,8 @@ function createNewArtifact() {
     console.log('artifact Created')
     console.log(artifactList)
     img.src = 'assets/default.png'
+    // saving to localstorage
+    saveToLocalStorage(artifactList);
 }
 const applyBtn = document.querySelector('.apply');
 applyBtn.addEventListener('click', ()=>{
@@ -122,8 +145,10 @@ browseBtn.addEventListener('click', ()=>{
     openBrowser();
 })
 const browserWindow = document.querySelector('.browser-window')
+
 function openBrowser() {
     console.log('opened')
+    getFromLocalStorage();
     updateBrowser();
     browserWindow.classList.toggle('visible');
 }
