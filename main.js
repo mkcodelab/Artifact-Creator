@@ -98,8 +98,6 @@ const enchArr =
 function saveToLocalStorage(array) {
     // stringifying artifact array
     let json = JSON.stringify(array);
-    
-    // console.log(json);
     //saving json to localstorage
     localStorage.setItem('artlist' ,json);
 }
@@ -111,8 +109,13 @@ function getFromLocalStorage() {
     artifactList = artlist;
 }
 
-function deleteArtifact(artifact) {
+function deleteArtifact() {
     // use filter method to remove from array, it can be name of artifact
+    //figure out how to get reference to that artifact in array
+    let a = artifactList;
+    let artName = this;
+    console.log(artName);
+    // a.splice(a.indexOf(artName),1);
     
 }
 
@@ -158,7 +161,7 @@ browserCloseBtn.addEventListener('click', ()=>{
 })
 
 
-//browser update
+//browser update, rendering all content of artifactList
 function updateBrowser() {
     let browserBox = document.querySelector('.browser-box');
     browserBox.innerHTML = '';
@@ -179,7 +182,12 @@ function updateBrowser() {
         if (tier >= 5) {
             icon = '<i class="tier-ico-2">💰</i>';
         }
-        // concat strings (diamonds)
+
+        // added dynamic class to change appearance of artifact container based on tier level
+        let tierClass = `tier-${tier}`;
+
+    
+        // concat strings (tier icons)
         for (let i = 0; i < tier; i++) {
             icons += icon;
         }
@@ -193,20 +201,27 @@ function updateBrowser() {
         });
 
         browserBox.innerHTML += `
-            <div class="artifact"> 
-                <div class="art-values">
-                    <h3>${art.name} ${icons}</h3>
-                    <p>${art.type}, tier ${art.tier}</p>
-                    <p>${enchant} ${enchantIcons}</p>
-                    <p class="art-spell">Spell: ${spell}</p>
-                    <p class="art-description">${art.description}</p>
-                    <p class="art-price">Price: ${art.price} </p>
-                    <p>${firstStat} ${art.statOne} </p>
-                </div>
-                    <img class="art-image" src="${art.image}">
+            <div class="artifact ${tierClass}">
+                    <div class="art-values">
+                        <h3>${art.name} ${icons}</h3>
+                        <p>${art.type}, tier ${art.tier}</p>
+                        <p>${enchant} ${enchantIcons}</p>
+                        <p class="art-spell">Spell: ${spell}</p>
+                        <p class="art-description">${art.description}</p>
+                        <p class="art-price">Price: ${art.price} </p>
+                        <p>${firstStat} ${art.statOne} </p>
+                    </div>
+                    <div class="img-box">
+                        <img class="art-image" src="${art.image}">
+                        <button class="remove-art-btn" id="removeArtBtn">Destroy It</button>
+                    </div>
                 </div>
             </div>
-        `
+        `;
+        let destroyBtns = document.querySelectorAll('#removeArtBtn');
+        destroyBtns.forEach(e=> {
+            addEventListener('click', deleteArtifact)
+        });
     }
 }
 // artifactList.push ( new Artifact( 'Chestplate', 'body', "image", 'ignis','descr', true))
