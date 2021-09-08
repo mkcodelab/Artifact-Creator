@@ -262,12 +262,17 @@ body {
     padding: .2rem;
     font-size: .7rem;
 }
+.remove-art-btn:hover {
+    cursor: pointer;
+    color: goldenrod;
+    filter: contrast(150%);
+}
 /* box containing art img and delete btn */
 .img-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
+   
 }
 /* tier colors */
 .tier-0 {
@@ -306,10 +311,10 @@ body {
     padding-left: 2em;
     padding-right: 2em;
 }
-.artifact:hover {
+/* .artifact:hover {
     filter: contrast(150%);
     cursor: pointer;
-}
+} */
 .art-values {
     width: 40%;
     border-left: 2px solid goldenrod;

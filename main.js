@@ -56,6 +56,7 @@ class Artifact {
         if (this.name.toLowerCase().includes("sharpness")) tier += 1;
         if (this.name.toLowerCase().includes("strong")) tier += 1;
         if (this.description.length >= 15) tier += 2;
+        if (this.description.toLowerCase().includes('superior')) tier += 1;
         this.tier = tier;
     }
     calcPrice() {
@@ -110,12 +111,22 @@ function getFromLocalStorage() {
 }
 
 function deleteArtifact() {
-    // use filter method to remove from array, it can be name of artifact
-    //figure out how to get reference to that artifact in array
-    let a = artifactList;
-    let artName = this;
-    console.log(artName);
-    // a.splice(a.indexOf(artName),1);
+    //traversing trough DOM to find the name of the artifact
+    let artBox = this.parentElement.parentElement;
+    let artName = artBox.children[0].children[0].innerText;
+
+    //loop through artifact list to find the corresponding artifact
+    for (art of artifactList) {
+        if ( artName === art.name) {
+            // console.log('clicked: ', artName);
+            // console.log('selected from list: ', art.name);
+            //finding the index of the clicked artifact
+            let index = artifactList.indexOf(art)
+            artifactList.splice(index, 1);
+        }
+    }
+    artBox.style.display = 'none';
+    saveToLocalStorage(artifactList);
     
 }
 
@@ -203,7 +214,8 @@ function updateBrowser() {
         browserBox.innerHTML += `
             <div class="artifact ${tierClass}">
                     <div class="art-values">
-                        <h3>${art.name} ${icons}</h3>
+                        <h3>${art.name}</h3>
+                        <p>${icons}</p>
                         <p>${art.type}, tier ${art.tier}</p>
                         <p>${enchant} ${enchantIcons}</p>
                         <p class="art-spell">Spell: ${spell}</p>
@@ -220,7 +232,7 @@ function updateBrowser() {
         `;
         let destroyBtns = document.querySelectorAll('#removeArtBtn');
         destroyBtns.forEach(e=> {
-            addEventListener('click', deleteArtifact)
+            e.addEventListener('click', deleteArtifact)
         });
     }
 }
