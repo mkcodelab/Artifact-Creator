@@ -108,4 +108,43 @@ assemblyBtn.addEventListener('click', ()=> {
     let category = 0;
     if (category == 0) unifiedAssembly(fluidSprite, glassSprite, paperSprite);
   }
+
+  // inside switch block we can declare variable, but it's scope is whole case statement...
+// we can do it with calling a function inside each switch case, and inside function scope declare category variable,
+// but it is much longer than if chain... i think.
+// try with declaring category outside switch, and in every case randomize it.
+
+
+  // switch(bodyPart) {
+  //    
+  //   case 'weapon': 
+  //     // random category
+  //     let category = Math.floor(Math.random() * 2);
+  //     // sword
+  //     if (category == 0) unifiedAssembly(swordSprite, gripSprite, pommelSprite, guardSprite);
+  //     // mace
+  //     else if (category == 1) unifiedAssembly(shaftSprite, headSprite);
+  //     break;
+  //   case 'body':
+  //     unifiedAssembly(armorSprite, decoSprite, pauldronSprite);
+  //     break;
+  //   case 'boots':
+  //     unifiedAssembly();
+  //     break;
+  //   case 'head':
+  //     unifiedAssembly();
+  //     break;
+  //   case 'pants':
+  //     unifiedAssembly(pantsSprite, cuisseSprite, tassetSprite);
+  //     break;
+  //   case 'gloves':
+  //     unifiedAssembly();
+  //     break;
+  //   case 'other':
+  //     let category = 0;
+  //     if (category == 0) unifiedAssembly(fluidSprite, glassSprite, paperSprite);
+  //     break;
+  //   default: break;
+  // }
+
 });

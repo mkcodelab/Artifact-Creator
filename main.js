@@ -240,6 +240,9 @@ function updateBrowser() {
 
 //todo
 /* 
+!!!!!!!!! IMPORTANT !!!!!!!!!!!!!
+make sure the  browse btn is dectivated when there is nothing to browse.
+otherwise it causes the crash, only at the start, when localstorage has not been used.
 add name checking for some prefixes and sufixes...
 diablo-like scheme.
 
